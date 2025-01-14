@@ -24,6 +24,24 @@ exports.getQuestionById = async (req, res) => {
   }
 };
 
+
+exports.getQuestionByType = async (req, res) => {
+  try {
+    const { type } = req.params;
+    const validTypes = ["general", "easy", "islamic", "global"];
+
+    if (!validTypes.includes(type)) {
+      return res.status(400).json({ error: "Invalid question type" });
+    }
+
+    const questions = await Question.find({ type });
+    res.status(200).json(questions);
+  } catch (error) {
+    res.status(500).json({ error: "Server error" });
+  }
+};
+
+
 // Create a new question
 exports.createQuestion = async (req, res) => {
   try {

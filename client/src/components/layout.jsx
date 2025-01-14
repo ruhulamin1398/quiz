@@ -1,22 +1,27 @@
 import { Outlet } from "react-router-dom";  
 import SideMenu from "./sideMenu";
 
-
+import { ToastContainer, toast } from 'react-toastify';
 
 export default function Layout() {
     return (
-      <div className="flex  h-[100vh]"> 
-      <div className="flex"> 
+      <>
+      <div className="flex min-h-screen  w-full "> 
+      <div className="flex min-h-screen "> 
 
        <SideMenu />
       </div>
       
-      <div className="flex px-4"> 
+      <div className="flex px-4 min-h-screen  w-full"> 
         <Outlet />
 
       </div>
 
 
       </div>
+
+      <ToastContainer />
+
+      </>
     );
   }

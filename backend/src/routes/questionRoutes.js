@@ -4,6 +4,7 @@ const questionController = require('../controllers/questionController');
 
 // Define routes for questions
 router.get('/', questionController.getAllQuestions);
+router.get('/type/:type', questionController.getQuestionByType);
 router.get('/:id', questionController.getQuestionById);
 router.post('/', questionController.createQuestion);
 router.put('/:id', questionController.updateQuestion);

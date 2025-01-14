@@ -36,7 +36,7 @@ import { Link } from 'react-router-dom';
       
       >
         <MenuItem> 
-        <div className='flex justify-between'> 
+        <div className='flex justify-between py-2'> 
             {!collapsed && ( <div className='flex text-white text-2xl '> 
               Admin 
             </div> )}
@@ -45,14 +45,24 @@ import { Link } from 'react-router-dom';
               <GiHamburgerMenu  size={25} className='ml-auto' />
           </div>
                  
-        </div>
-
+        </div> 
             
         </MenuItem>
     
-        <MenuItem>
+        {/* <MenuItem>
            <Link className="w-full" to="/question">Qestion</Link>
-         </MenuItem>
+         </MenuItem> */}
+
+         <SubMenu label="Qestion">
+      <MenuItem>
+           <Link className="w-full" to="/questions">All Questions</Link>
+    
+      </MenuItem> 
+      <MenuItem>
+           <Link className="w-full" to="/create-question">new Question</Link>
+    
+      </MenuItem> 
+    </SubMenu>
       
        </Menu>
      </Sidebar>   

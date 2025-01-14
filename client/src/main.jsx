@@ -5,6 +5,8 @@ import App from './App.jsx'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Layout from './components/layout.jsx';
 import SideMenu from './components/sideMenu.jsx';
+import CreateQuestion from './pages/createQuestion.jsx';
+import AllQuestions from './pages/AllQuestions.jsx';
 
 const router = createBrowserRouter([
   {
@@ -12,8 +14,11 @@ const router = createBrowserRouter([
     element: <Layout/>,
     children: [
       {
-        path: "question",
-        element: <App />, 
+        path: "questions",
+        element: <AllQuestions />, 
+      }, {
+        path: "create-question",
+        element: <CreateQuestion />, 
       },  
     ],
   },  
