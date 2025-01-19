@@ -203,36 +203,41 @@ const loginOrRegisterUser = asyncHandler(async (req, res) => {
 
 const updateSponsor = asyncHandler(async (req, res) => {
     const { email } = req.user;
-    const { firebase_token } = req.body
-
+    const { sponsor } = req.body
     const user = await User.findOne({ email });
-    res.json({
-        email
-    })
 
 
-    if (user) {
+    if (sponsor && user && user.sponsor == "") {
 
-        await User.findByIdAndUpdate(
+        const updatedUser = await User.findByIdAndUpdate(
             user.id,
-            { firebase_token: firebase_token },
+            { sponsor: sponsor },
             { new: true }
         );
 
-        if (!firebase_token) {
+        if (updatedUser.sponsor == "") {
             res.status(500);
             throw new Error("Some things went worong , Please try again")
         }
 
+        res.status(200)
+        res.json({
 
+            "msg": "Sponsor update Successful",
+            "sponsor": updatedUser.sponsor
+        })
+
+
+
+    } else {
+
+
+        res.status(400)
+        res.json({
+
+            "msg": "Bed Request",
+        })
     }
-
-    res.status(200)
-    res.json({
-
-        "msg": "Token update Successful",
-        "firebase_token": firebase_token,
-    })
 
 
 

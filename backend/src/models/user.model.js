@@ -22,6 +22,10 @@ const userSchema = new Schema({
     type: String,
     default: "",
   },
+  sponsor: {
+    type: String,
+    default: "",
+  },
   is_verified: {
     type: Boolean,
     default: true,
