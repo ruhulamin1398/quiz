@@ -7,6 +7,7 @@ const AllQuestions = () => {
   let SL = 1;
   const [activeTab, setActiveTab] = useState("general");
   const [questions, setQuestions] = useState([]);
+  const [types, setTypes] = useState([]);
 
   // Fetch questions by type
   const fetchQuestions = async (type) => {
@@ -18,29 +19,47 @@ const AllQuestions = () => {
     }
   };
 
+  const fetchTypes = async () => {
+    try {
+      console.log(`${backendUrl}/quiz-types`)
+      const response = await axios.get(`${backendUrl}/quiz-types`);
+      setTypes(response.data.quizTypes);
+      console.log(response.data.quizTypes)
+      setActiveTab(response.data.quizTypes[0].type);
+
+    } catch (error) {
+      toast.error("Error fetching questions:");
+      console.error("Error fetching questions:", error.message);
+    }
+  };
+
   useEffect(() => {
     fetchQuestions(activeTab);
   }, [activeTab]);
 
-  const tabs = ["general", "easy", "islamic", "global"];
+  useEffect(() => {
+    fetchTypes();
+  }, []);
+
+  // const tabs = ["general", "easy", "islamic", "global"];
 
   return (
-    <div className="p-6 bg-gray-100 min-h-screen flex justify-between w-full">
-      <div className="max-w-4xl mx-auto bg-white shadow-md rounded-lg p-6">
+    <div className="p-6 bg-gray-100 min-h-screen flex justify-between min-w-full">
+      <div className="w-full mx-auto bg-white shadow-md rounded-lg p-6">
         <h1 className="text-2xl font-bold mb-4">All Questions</h1>
 
         {/* Tabs */}
         <div className="flex space-x-4 mb-6">
-          {tabs.map((tab) => (
+          {types.map((tab) => (
             <button
-              key={tab}
-              onClick={() => setActiveTab(tab)}
-              className={`py-2 px-4 rounded-md ${activeTab === tab
-                  ? "bg-blue-500 text-white"
-                  : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+              key={tab.type}
+              onClick={() => setActiveTab(tab.type)}
+              className={`py-2 px-4 rounded-md ${activeTab === tab.type
+                ? "bg-blue-500 text-white"
+                : "bg-gray-200 text-gray-700 hover:bg-gray-300"
                 }`}
             >
-              {tab.charAt(0).toUpperCase() + tab.slice(1)} Questions
+              {tab.type}
             </button>
           ))}
         </div>

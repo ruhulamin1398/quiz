@@ -7,29 +7,34 @@ import Layout from './components/layout.jsx';
 import SideMenu from './components/sideMenu.jsx';
 import CreateQuestion from './pages/createQuestion.jsx';
 import AllQuestions from './pages/AllQuestions.jsx';
+import QuizTypes from './pages/QuizTypes.jsx';
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Layout/>,
+    element: <Layout />,
     children: [
       {
+        path: "quiz-types",
+        element: <QuizTypes />,
+      },
+      {
         path: "questions",
-        element: <AllQuestions />, 
+        element: <AllQuestions />,
       }, {
         path: "create-question",
-        element: <CreateQuestion />, 
-      },  
+        element: <CreateQuestion />,
+      },
     ],
-  },  
+  },
 ]);
 
 createRoot(document.getElementById('root')).render(
- 
- 
-<React.StrictMode>
+
+
+  <React.StrictMode>
     <RouterProvider router={router} />
   </React.StrictMode>
- 
- 
+
+
 )

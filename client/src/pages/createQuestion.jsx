@@ -7,6 +7,7 @@ const CreateQuestion = () => {
   const backendUrl = import.meta.env.VITE_BACKEND_URL;
   console.log(backendUrl);
   const [questions, setQuestions] = useState([]);
+  const [types, setTypes] = useState([]);
   const [formData, setFormData] = useState({
     type: "general",
     title: "",
@@ -18,12 +19,24 @@ const CreateQuestion = () => {
   // Fetch all questions
   useEffect(() => {
     fetchQuestions();
+    fetchTypes();
   }, []);
 
   const fetchQuestions = async () => {
     try {
       const response = await axios.get(`${backendUrl}/questions`);
       setQuestions(response.data);
+    } catch (error) {
+      toast.error("Error fetching questions:");
+      console.error("Error fetching questions:", error.message);
+    }
+  };
+  const fetchTypes = async () => {
+    try {
+      console.log(`${backendUrl}/quiz-types`)
+      const response = await axios.get(`${backendUrl}/quiz-types`);
+      setTypes(response.data.quizTypes);
+      console.log(response.data.quizTypes)
     } catch (error) {
       toast.error("Error fetching questions:");
       console.error("Error fetching questions:", error.message);
@@ -101,10 +114,13 @@ const CreateQuestion = () => {
               onChange={handleChange}
               className="w-full mt-2 p-2 border rounded-md"
             >
-              <option value="general">General</option>
-              <option value="easy">Easy</option>
-              <option value="islamic">Islamic</option>
-              <option value="global">Global</option>
+              {types?.map((type) => (
+                <option key={type.type} value={type.type}>
+                  {type.type}
+                </option>
+              ))}
+
+
             </select>
           </div>
 
@@ -166,7 +182,7 @@ const CreateQuestion = () => {
       <div className="mt-10   ">
         <h2 className="text-2xl font-bold mb-4">Latest Questions</h2>
         <ul className="space-y-4">
-          {questions.slice(-10).map((question) => (
+          {questions.slice(-6).map((question) => (
             <li
               key={question._id}
               className="bg-white shadow-md rounded-lg p-4 flex justify-between items-center"
