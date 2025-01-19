@@ -6,7 +6,6 @@ const questionSchema = new Schema({
   type: {
     type: String,
     required: true,
-    enum: ["general", "easy", "islamic", "global"] 
   },
   title: {
     type: String,
