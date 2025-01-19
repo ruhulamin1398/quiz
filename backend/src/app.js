@@ -5,8 +5,9 @@ require("./db/conn")
 const path = require('path');
 const cors = require("cors");
 
-const questionRoutes = require('./routes/questionRoutes');
-const userRoutes = require('./routes/userRoutes');
+const userRoutes = require('./routes/user.routes');
+const questionRoutes = require('./routes/question.routes');
+const quizTypeRoutes = require('./routes/quizType.routes');
 const AsyncHandler = require("express-async-handler");
 
 
@@ -24,8 +25,9 @@ app.get('/hi', AsyncHandler(async (req, res) => {
 
 }));
 
-app.use('/api/questions', questionRoutes);
 app.use('/api/users', userRoutes);
+app.use('/api/questions', questionRoutes);
+app.use("/api/quiz-types", quizTypeRoutes);
 
 const PORT = process.env.PORT || 5001;
 app.listen(PORT, () => {
