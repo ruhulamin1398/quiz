@@ -126,7 +126,7 @@ const CreateQuestion = () => {
 
           <div className="mb-4">
             <label htmlFor="title" className="block text-gray-700 font-medium">
-              Title
+              Question
             </label>
             <input
               id="title"

@@ -49,23 +49,16 @@ function SideMenu() {
 
           </MenuItem>
 
-          {/* <MenuItem>
-           <Link className="w-full" to="/question">Qestion</Link>
-         </MenuItem> */}
+
 
           <SubMenu label="Qestion">
-            <MenuItem>
-              <Link className="w-full" to="/questions">All Questions</Link>
-
-            </MenuItem>
-            <MenuItem>
-              <Link className="w-full" to="/create-question">new Question</Link>
-
-            </MenuItem>
+            <MenuItem component={<Link to="/create-question" />} > Add New </MenuItem>
+            <MenuItem component={<Link to="/questions" />}>    All Questions   </MenuItem>
           </SubMenu>
-          <MenuItem>
-            <Link className="w-full" to="/quiz-types">Quiz Types</Link>
-          </MenuItem>
+          <SubMenu label="Quiz">
+            <MenuItem component={<Link to="/create-quiz" />} > Add New</MenuItem>
+            <MenuItem component={<Link to="/quiz-types" />} > Quiz Types</MenuItem>
+          </SubMenu>
 
         </Menu>
       </Sidebar>

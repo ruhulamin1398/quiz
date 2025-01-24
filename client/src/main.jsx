@@ -4,10 +4,10 @@ import './index.css'
 import App from './App.jsx'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Layout from './components/layout.jsx';
-import SideMenu from './components/sideMenu.jsx';
-import CreateQuestion from './pages/createQuestion.jsx';
-import AllQuestions from './pages/AllQuestions.jsx';
-import QuizTypes from './pages/QuizTypes.jsx';
+import CreateQuestion from './pages/quiz/createQuestion.jsx';
+import AllQuestions from './pages/quiz/allQuestions.jsx';
+import QuizTypes from './pages/quiz/quizTypes.jsx';
+import CreateQuiz from './pages/quiz/createQuiz.jsx';
 
 const router = createBrowserRouter([
   {
@@ -24,6 +24,9 @@ const router = createBrowserRouter([
       }, {
         path: "create-question",
         element: <CreateQuestion />,
+      }, {
+        path: "create-quiz",
+        element: <CreateQuiz />,
       },
     ],
   },
