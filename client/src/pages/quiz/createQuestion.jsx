@@ -34,7 +34,7 @@ const CreateQuestion = () => {
   const fetchTypes = async () => {
     try {
       console.log(`${backendUrl}/quiz-types`)
-      const response = await axios.get(`${backendUrl}/quiz-types`);
+      const response = await axios.get(`${backendUrl}/quiz-question-types`);
       setTypes(response.data.quizTypes);
       console.log(response.data.quizTypes)
     } catch (error) {

@@ -17,10 +17,11 @@ const userQuizQuestionSchema = new Schema({
         ref: 'Question',
         required: true,
     },
-    round: {
-        type: Number,
+    questionType: {
+        type: String,
         required: true,
-    }, answered: {
+    },
+    answered: {
         type: Number,
         required: false,
     },

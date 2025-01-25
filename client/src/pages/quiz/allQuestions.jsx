@@ -21,8 +21,8 @@ const AllQuestions = () => {
 
   const fetchTypes = async () => {
     try {
-      console.log(`${backendUrl}/quiz-types`)
-      const response = await axios.get(`${backendUrl}/quiz-types`);
+      console.log(`${backendUrl}/quiz-question-types`)
+      const response = await axios.get(`${backendUrl}/quiz-question-types`);
       setTypes(response.data.quizTypes);
       console.log(response.data.quizTypes)
       setActiveTab(response.data.quizTypes[0].type);

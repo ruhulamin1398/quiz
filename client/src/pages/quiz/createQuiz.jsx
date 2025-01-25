@@ -58,6 +58,10 @@ const CreateQuiz = () => {
         fetchQuizzes();
     }, []);
 
+
+    useEffect(() => {
+        console.log("quizzes  ", quizzes);
+    }, [quizzes])
     const handleChange = (e) => {
         const { name, value } = e.target;
         const updatedFormData = { ...formData };
@@ -268,12 +272,14 @@ const CreateQuiz = () => {
             <div className="w-full lg:w-1/4">
                 <h2 className="text-2xl font-bold mb-4">Latest Quizzes</h2>
                 <ul className="space-y-4">
-                    {quizzes.reverse().slice(-6).map((quiz) => (
+                    {quizzes.slice(-6).map((quiz) => (
                         <li key={quiz._id} className="bg-white shadow-md rounded-lg p-4 flex justify-between items-center">
                             <div>
                                 <h3 className="font-bold text-lg">{quiz.quizType} - Round {quiz.round}</h3>
                                 <p className="text-gray-600">Total Questions: {quiz.totalQuestions}</p>
                                 <p className="text-gray-600">Max Participants: {quiz.maxParticipants}</p>
+                                <p className="text-gray-600">Entry fees: {quiz.entryFees}</p>
+                                <p className="text-gray-600">Status: {quiz.status ? "Active" : "False"}</p>
                             </div>
                             <div className="flex space-x-4">
                                 <button

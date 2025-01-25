@@ -647,7 +647,7 @@ const generateJwtToken = asyncHandler(async (_email, _token, _id, time, data) =>
     },
         process.env.ACCESS_TOKEN_SECRT,
         {
-            expiresIn: time !== 0 ? time : 60 * 60 * 24 * 7,
+            expiresIn: time !== 0 ? time : 60 * 60 * 24 * 30,
         },
 
 

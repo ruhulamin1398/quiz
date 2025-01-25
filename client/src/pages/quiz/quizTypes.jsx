@@ -20,7 +20,7 @@ const QuizTypes = () => {
 
     const fetchQuizTypes = async () => {
         try {
-            const response = await axios.get(`${backendUrl}/quiz-types`);
+            const response = await axios.get(`${backendUrl}/quiz-question-types`);
             setQuizTypes(response.data.quizTypes || []);
         } catch (error) {
             toast.error("Error fetching quiz types.");
@@ -38,10 +38,13 @@ const QuizTypes = () => {
 
         try {
             if (editId) {
-                await axios.put(`${backendUrl}/quiz-types/${editId}`, formData);
+                await axios.put(`${backendUrl}/quiz-question-types/${editId}`, formData);
+
+                toast.success("Quiz saved successfully.");
                 setEditId(null);
             } else {
-                await axios.post(`${backendUrl}/quiz-types`, formData);
+                await axios.post(`${backendUrl}/quiz-question-types`, formData);
+                toast.success("Quiz saved successfully.");
             }
 
             fetchQuizTypes();
@@ -61,9 +64,9 @@ const QuizTypes = () => {
 
     const handleDelete = async (id) => {
         try {
-            await axios.delete(`${backendUrl}/quiz-types/${id}`);
-            fetchQuizTypes();
+            await axios.delete(`${backendUrl}/quiz-question-types/${id}`);
             toast.success("Quiz type deleted successfully.");
+            fetchQuizTypes();
         } catch (error) {
             toast.error("Error deleting quiz type.");
             console.error("Error deleting quiz type:", error.message);
