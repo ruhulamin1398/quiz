@@ -9,12 +9,15 @@ const quizSchema = new Schema(
             enum: ['general', 'foreign', 'test'],
             required: true,
         },
-        round: {
+        status: {
+            type: Boolean,
+            default: true,
+        }, round: {
             type: Number,
             required: true,
             min: 1,
         },
-        entryFee: {
+        entryFees: {
             type: Number,
             required: true,
             min: 1,
@@ -32,8 +35,7 @@ const quizSchema = new Schema(
                 },
                 count: {
                     type: Number,
-                    required: true,
-                    min: 1,
+                    default: 0,
                 },
             },
         ],
@@ -44,7 +46,12 @@ const quizSchema = new Schema(
         },
         prizes: [
             {
-                count: {
+                label: {
+                    type: String,
+                    required: true,
+                    min: 1,
+                },
+                total_person: {
                     type: Number,
                     required: true,
                     min: 1,

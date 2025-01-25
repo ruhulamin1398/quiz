@@ -8,6 +8,10 @@ router.post('/', quizController.createQuiz);
 // Route to get all quizzes
 router.get('/', quizController.getQuizzes);
 
+router.get('/inactive-quizzzes', quizController.getInactiveQuizzes);
+
+router.get('/active-quizzzes', quizController.getActiveQuizzes);
+
 // Route to get a quiz by ID
 router.get('/:id', quizController.getQuizById);
 

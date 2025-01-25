@@ -1,6 +1,10 @@
 
 import { useState } from 'react';
-import { GiHamburgerMenu } from 'react-icons/gi';
+import { GiHamburgerMenu, GiQuakeStomp } from 'react-icons/gi';
+import { FaQuestionCircle } from "react-icons/fa";
+import { MdQuiz } from "react-icons/md";
+
+
 import { Sidebar, Menu, MenuItem, SubMenu, sidebarClasses } from 'react-pro-sidebar';
 import { Link } from 'react-router-dom';
 
@@ -51,11 +55,11 @@ function SideMenu() {
 
 
 
-          <SubMenu label="Qestion">
+          <SubMenu icon={<FaQuestionCircle />} label="Qestion">
             <MenuItem component={<Link to="/create-question" />} > Add New </MenuItem>
             <MenuItem component={<Link to="/questions" />}>    All Questions   </MenuItem>
           </SubMenu>
-          <SubMenu label="Quiz">
+          <SubMenu icon={<MdQuiz />} label="Quiz">
             <MenuItem component={<Link to="/create-quiz" />} > Add New</MenuItem>
             <MenuItem component={<Link to="/quiz-types" />} > Quiz Types</MenuItem>
           </SubMenu>
