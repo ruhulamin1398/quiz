@@ -4,15 +4,20 @@ const Schema = mongoose.Schema;
 // Define the schema for the QUIZ
 const quizSchema = new Schema(
     {
-        lotteryType: {
+        quizType: {
             type: String,
             enum: ['general', 'foreign', 'test'],
             required: true,
         },
         status: {
             type: Boolean,
-            default: true,
-        }, round: {
+            default: false,
+        },
+        isEnrolled: {
+            type: Boolean,
+            default: false,
+        },
+        round: {
             type: Number,
             required: true,
             min: 1,

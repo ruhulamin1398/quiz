@@ -17,7 +17,7 @@ const CreateQuiz = () => {
     const [quizzes, setQuizzes] = useState([]);
     const [types, setTypes] = useState([]);
     const [formData, setFormData] = useState({
-        lotteryType: "general",
+        quizType: "general",
         round: 1,
         entryFees: 0,
         totalQuestions: 0,
@@ -29,7 +29,8 @@ const CreateQuiz = () => {
 
     const fetchTypes = async () => {
         try {
-            const response = await axios.get(`${backendUrl}/quiz-types`);
+            console.log(`${backendUrl}/question-types`)
+            const response = await axios.get(`${backendUrl}/quiz-question-types`);
             const quizTypes = response.data.quizTypes || [];
             setTypes(quizTypes);
 
@@ -43,6 +44,7 @@ const CreateQuiz = () => {
 
     const fetchQuizzes = async () => {
         try {
+            console.log(`${backendUrl}/quizzes`)
             const response = await axios.get(`${backendUrl}/quizzes`);
             setQuizzes(response.data || []);
         } catch (error) {
@@ -88,7 +90,7 @@ const CreateQuiz = () => {
             toast.success(editId ? "Quiz updated successfully!" : "Quiz created successfully!");
 
             setFormData({
-                lotteryType: "general",
+                quizType: "general",
                 round: 1,
                 entryFees: 0,
                 totalQuestions: 0,
@@ -127,13 +129,13 @@ const CreateQuiz = () => {
                 <h1 className="text-2xl font-bold mb-4">{editId ? "Edit" : "Create"} Quiz</h1>
                 <form onSubmit={handleSubmit}>
                     <div className="mb-4">
-                        <label htmlFor="lotteryType" className="block text-gray-700 font-medium text-lg">
-                            Lottery Type
+                        <label htmlFor="quizType" className="block text-gray-700 font-medium text-lg">
+                            Quiz Type
                         </label>
                         <select
-                            id="lotteryType"
-                            name="lotteryType"
-                            value={formData.lotteryType}
+                            id="quizType"
+                            name="quizType"
+                            value={formData.quizType}
                             onChange={handleChange}
                             className="w-full mt-2 p-2 border rounded-md"
                         >
@@ -269,7 +271,7 @@ const CreateQuiz = () => {
                     {quizzes.reverse().slice(-6).map((quiz) => (
                         <li key={quiz._id} className="bg-white shadow-md rounded-lg p-4 flex justify-between items-center">
                             <div>
-                                <h3 className="font-bold text-lg">{quiz.lotteryType} - Round {quiz.round}</h3>
+                                <h3 className="font-bold text-lg">{quiz.quizType} - Round {quiz.round}</h3>
                                 <p className="text-gray-600">Total Questions: {quiz.totalQuestions}</p>
                                 <p className="text-gray-600">Max Participants: {quiz.maxParticipants}</p>
                             </div>

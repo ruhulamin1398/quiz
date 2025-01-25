@@ -14,14 +14,18 @@ const validateToken = asyncHandler(async (req, res, next) => {
             const decoded = await jwt.verify(token, process.env.ACCESS_TOKEN_SECRT);
 
             req.user = decoded.user;
+            console.log("req.user", req.user);
             const email = decoded.user.email;
 
             if (decoded.user.type === "user") {
                 try {
                     const user = await User.findOne({ email });
 
-                    console.log("token: ", email);
-                    console.log("userToken: ", user.token);
+                    // console.log("user", user);
+
+                    // console.log("token: ", email);
+                    // console.log("userToken: ", user.token);
+                    req.user = user;
 
                     if (user.token !== token) {
                         res.status(401);

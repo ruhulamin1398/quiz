@@ -12,8 +12,8 @@ exports.createQuiz = async (req, res) => {
       });
     }
 
-    // Get the latest round for the specified lotteryType
-    const latestQuiz = await Quiz.findOne({ lotteryType: quizData.lotteryType })
+    // Get the latest round for the specified quizType
+    const latestQuiz = await Quiz.findOne({ quizType: quizData.quizType })
       .sort({ round: -1 }) // Sort by round in descending order to get the latest
       .exec();
 

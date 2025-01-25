@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const QuizTypeSchema = new mongoose.Schema(
+const quizQuestionTypeSchema = new mongoose.Schema(
     {
         type: {
             type: String,
@@ -18,4 +18,4 @@ const QuizTypeSchema = new mongoose.Schema(
     { timestamps: true } // Automatically adds `createdAt` and `updatedAt` fields
 );
 
-module.exports = mongoose.model("QuizType", QuizTypeSchema);
+module.exports = mongoose.model("QuizQuestionType", quizQuestionTypeSchema);

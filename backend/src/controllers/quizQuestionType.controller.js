@@ -1,10 +1,10 @@
 const asyncHandler = require("express-async-handler");
-const QuizType = require("../models/quizType.model");
+const QuizQuestionType = require("../models/quizQuestionType.model");
 
 // @desc    Create a new quiz type
 // @route   POST /api/v1/quiz-types
 // @access  Public
-exports.createQuizType = asyncHandler(async (req, res) => {
+exports.createQuizQuestionType = asyncHandler(async (req, res) => {
     const { type, description } = req.body;
 
     if (!type || !description) {
@@ -12,14 +12,14 @@ exports.createQuizType = asyncHandler(async (req, res) => {
         throw new Error("All fields are mandatory");
     }
 
-    const existingQuizType = await QuizType.findOne({ type });
+    const existingQuizQuestionType = await QuizQuestionType.findOne({ type });
 
-    if (existingQuizType) {
+    if (existingQuizQuestionType) {
         res.status(400);
         throw new Error("Quiz type already exists");
     }
 
-    const quizType = await QuizType.create({ type, description });
+    const quizType = await QuizQuestionType.create({ type, description });
 
     if (quizType) {
         res.status(201).json({
@@ -35,8 +35,9 @@ exports.createQuizType = asyncHandler(async (req, res) => {
 // @desc    Get all quiz types
 // @route   GET /api/v1/quiz-types
 // @access  Public
-exports.getAllQuizTypes = asyncHandler(async (req, res) => {
-    const quizTypes = await QuizType.find();
+exports.getAllQuizQuestionTypes = asyncHandler(async (req, res) => {
+    const quizTypes = await QuizQuestionType.find();
+    console.log(quizTypes);
 
     res.status(200).json({
         message: "Quiz types retrieved successfully",
@@ -48,10 +49,10 @@ exports.getAllQuizTypes = asyncHandler(async (req, res) => {
 // @desc    Get a single quiz type by ID
 // @route   GET /api/v1/quiz-types/:id
 // @access  Public
-exports.getQuizTypeById = asyncHandler(async (req, res) => {
+exports.getQuizQuestionTypeById = asyncHandler(async (req, res) => {
     const { id } = req.params;
 
-    const quizType = await QuizType.findById(id);
+    const quizType = await QuizQuestionType.findById(id);
 
     if (!quizType) {
         res.status(404);
@@ -68,7 +69,7 @@ exports.getQuizTypeById = asyncHandler(async (req, res) => {
 // @route   PUT /api/v1/quiz-types/:id
 // @access  Public
 
-exports.updateQuizType = asyncHandler(async (req, res) => {
+exports.updateQuizQuestionType = asyncHandler(async (req, res) => {
     const { id } = req.params;
     const { type, description } = req.body;
 
@@ -77,7 +78,7 @@ exports.updateQuizType = asyncHandler(async (req, res) => {
         throw new Error("All fields are mandatory");
     }
 
-    const quizType = await QuizType.findById(id);
+    const quizType = await QuizQuestionType.findById(id);
 
     if (!quizType) {
         res.status(404);
@@ -87,11 +88,11 @@ exports.updateQuizType = asyncHandler(async (req, res) => {
     quizType.type = type;
     quizType.description = description;
 
-    const updatedQuizType = await quizType.save();
+    const updatedQuizQuestionType = await quizType.save();
 
     res.status(200).json({
         message: "Quiz type updated successfully",
-        quizType: updatedQuizType,
+        quizType: updatedQuizQuestionType,
     });
 });
 
@@ -100,10 +101,10 @@ exports.updateQuizType = asyncHandler(async (req, res) => {
 // @desc    Delete a quiz type by ID
 // @route   DELETE /api/v1/quiz-types/:id
 // @access  Public
-exports.deleteQuizType = asyncHandler(async (req, res) => {
+exports.deleteQuizQuestionType = asyncHandler(async (req, res) => {
     const { id } = req.params;
 
-    const quizType = await QuizType.findById(id);
+    const quizType = await QuizQuestionType.findById(id);
 
     if (!quizType) {
         res.status(404);
