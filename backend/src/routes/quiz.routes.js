@@ -27,5 +27,6 @@ router.delete('/:id', quizController.deleteQuiz);
 
 // Route to create a new quiz
 router.post('/enroll/:id', validateToken, quizQuetionController.enrollUser);
+router.post('/submit-answers/:id', validateToken, quizQuetionController.submitAnswer);
 
 module.exports = router;

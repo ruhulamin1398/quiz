@@ -1,5 +1,6 @@
 const Quiz = require('../models/quiz.model');
-const quizQuestionController = require("../controllers/quizQuestion.controller")
+const quizQuestionController = require("../controllers/quizQuestion.controller");
+const Enrollment = require('../models/enrollment.model');
 // Create a new quiz
 exports.createQuiz = async (req, res) => {
   try {
@@ -90,16 +91,22 @@ exports.getQuizById = async (req, res) => {
 
   const quizId = req.params.id;
   const userId = req.user.id;
-  const questionsList = await quizQuestionController.getUserQuestionsInQuiz(userId, quizId);
-  console.log(questionsList);
-
-
-
+  let questionsList = [];
   try {
-    const quiz = await Quiz.findById(req.params.id);
+    const quiz = await Quiz.findById(req.params.id).lean();;
     if (!quiz) {
       return res.status(404).json({ message: 'Quiz not found' });
     }
+
+    const existingEnrollment = await Enrollment.findOne({ userId, quizId, isCompleted: false }).exec();
+    if (existingEnrollment) {
+      quiz.isEnrolled = true;
+      quiz.enrollmentId = existingEnrollment.id;
+      quiz.enrollements = await Enrollment.find({ userId, quizId }).exec();
+      questionsList = await quizQuestionController.getUserQuestionsInQuiz(userId, existingEnrollment.id);
+    }
+
+
     res.status(200).json({ quiz, questionsList });
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -136,9 +143,3 @@ exports.deleteQuiz = async (req, res) => {
 };
 
 
-// Enroll User
-exports.enrollQuiz = async (req, res) => {
-
-  res.json({ message: 'Enroll Quiz' });
-
-};

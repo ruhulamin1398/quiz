@@ -1,7 +1,8 @@
+
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const userQuizQuestionSchema = new Schema({
+const enrollmentSchema = new Schema({
     userId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
@@ -13,32 +14,30 @@ const userQuizQuestionSchema = new Schema({
         required: true,
     },
 
-    enrollmentId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Enrollment',
-        required: true,
+    earnedPoints: {
+        type: Number,
+        default: 0,
     },
-    questionId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Question',
-        required: true,
+    totalCorrectAnswer: {
+        type: Number,
+        default: 0,
     },
-    questionType: {
-        type: String,
-        required: true,
+    totalWrongAnswer: {
+        type: Number,
+        default: 0,
     },
-    isAnswered: {
+    isCompleted: {
         type: Boolean,
         default: false,
     },
-    isCorrect: {
+    isPassed: {
         type: Boolean,
         required: false,
-    },
+    }
 }, {
     timestamps: true,
 });
 
 
-const UserQuizQuestion = mongoose.model('UserQuizQuestion', userQuizQuestionSchema);
+const UserQuizQuestion = mongoose.model('Enrollment', enrollmentSchema);
 module.exports = UserQuizQuestion;
